@@ -1,0 +1,24 @@
+language: generic
+dist: xenial
+
+branches:
+  only:
+    - master 
+
+install:
+  - curl -LO https://github.com/gohugoio/hugo/releases/download/v0.72.0/hugo_extended_0.72.0_Linux-64bit.deb
+  - sudo dpkg -i hugo_extended_0.72.0_Linux-64bit.deb
+
+script:
+  - hugo
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local-dir: public
+  repo: leoryu/leoryu.github.io
+  target-branch: master
+  github-token: $GITHUB_TOKEN
+  keep-history: false
+  on:
+    branch: master
